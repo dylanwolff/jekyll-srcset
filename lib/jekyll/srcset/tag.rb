@@ -65,7 +65,6 @@ module Jekyll
       end
     end
 
-
     def generate_image(site, src, attrs)
       cache = cache_dir(site)
       sha = cache && Digest::SHA1.hexdigest(attrs.sort.inspect + File.read(File.join(site.source, src)) + (optimize?(site) ? "optimize" : ""))
@@ -96,9 +95,9 @@ module Jekyll
 
       img_attrs["height"] = attrs["height"] if attrs["height"]
       img_attrs["width"]  = attrs["width"]  if attrs["width"]
-		img_width = img.columns * scale
-		img_height = img.rows * scale
-		img_attrs["src"] = src.sub(/(\.\w+)$/, "-" + (img_width.to_int.to_s) + "x" + (img_height.to_int.to_s) + '\1')
+      img_width = img.columns * scale
+      img_height = img.rows * scale
+      img_attrs["src"] = src.sub(/(\.\w+)$/, "-" + (img_width.to_int.to_s) + "x" + (img_height.to_int.to_s) + '\1')
 
       filename = img_attrs["src"].sub(/^\//, '')
       dest = File.join(site.dest, filename)
@@ -108,7 +107,7 @@ module Jekyll
         img.scale!(scale) if scale <= 1
         img.strip!
         
-        if dest.match(/\.jpg$/) or dest.match(/\.jpeg$/)
+        if dest.match(/\.jpe?g$/)
           quality = jpeg_quality(site)
           img.write(dest) do self.quality = quality end
         else
