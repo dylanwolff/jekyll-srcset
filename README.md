@@ -70,7 +70,23 @@ srcset:
 
 To your \_config.yml
 
-Currently the plugin doesn't optimize other image formats, except for stripping color palettes.
+## Mozjpeg
+
+If you have `cjpeg` installed and added to your PATH, you can tell the plugin to optimize all output jpegs. 
+If you get the error `Unrecognized input file format --- perhaps you need -targa`, you have a different
+cjpeg binary in your PATH. Make sure the Mozjpeg version is before it.
+
+Just add:
+
+```
+srcset:
+  cjpeg: true
+```
+
+To your \_config.yml
+
+**Note**: This can increase the generation time of your site significantly depending on how many images you have.
+Also, you may want to bump the quality setting if you see more artifacts in the Mozjpeg-generated version.
 
 ## Caching images
 

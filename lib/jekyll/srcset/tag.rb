@@ -5,9 +5,16 @@ module Jekyll
   class SrcsetTag < Liquid::Tag
     include Magick
     attr_accessor :markup
+    
+    # Default quality
+    DEFAULT_QUALITY = 80
 
     def self.optipng?
-      @optinpng ||= system("which optipng")
+      @optinpng ||= system("which", "optipng", :out => File::NULL)
+    end
+    
+    def self.cjpeg?
+      @cjpeg ||= system("which", "cjpeg", :out => File::NULL)
     end
 
     def initialize(tag_name, markup, _)
@@ -52,6 +59,10 @@ module Jekyll
     def optimize?(site)
       config(site)['optipng']
     end
+    
+    def cjpeg?(site)
+      config(site)['cjpeg']
+    end
 
     def cache_dir(site)
       config(site)['cache']
@@ -61,7 +72,7 @@ module Jekyll
       if config(site).key? 'jpeg_quality'
         config(site)['jpeg_quality']
       else
-        80 #DEFAULT QUALITY
+        DEFAULT_QUALITY
       end
     end
 
@@ -107,6 +118,7 @@ module Jekyll
         img.scale!(scale) if scale <= 1
         img.strip!
         
+        # Write resized file
         if dest.match(/\.jpe?g$/)
           quality = jpeg_quality(site)
           img.write(dest) do self.quality = quality end
@@ -114,11 +126,19 @@ module Jekyll
           img.write(dest)
         end
 
+        # Optimize pngs
         if dest.match(/\.png$/) && optimize?(site) && self.class.optipng?
-          `optipng #{dest}`
+          IO.popen(["optipng", dest])
+        end
+        
+        # Optimize jpegs using Mozjpeg
+        if dest.match(/\.jpe?g$/) && cjpeg?(site) && self.class.cjpeg?
+          IO.popen(["cjpeg", "-quality", jpeg_quality(site).to_s, dest])
         end
       end
+      
       site.config['keep_files'] << filename unless site.config['keep_files'].include?(filename)
+      
       # Keep files around for incremental builds in Jekyll 3
       site.regenerator.add(filename) if site.respond_to?(:regenerator)
 

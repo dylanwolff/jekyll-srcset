@@ -6,8 +6,8 @@ require 'jekyll/srcset/version'
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-srcset"
   spec.version       = Jekyll::Srcset::VERSION
-  spec.authors       = ["Mathias Biilmann Christensen"]
-  spec.email         = ["info@mathias-biilmann.net"]
+  spec.authors       = ["Jason Gabriele"]
+  spec.email         = ["jason.gabriele@gmail.com"]
   spec.summary       = %q{This Jekyll plugin ads an image_tag that will generate responsive img tags}
   spec.description   = %q{
   This Jekyll plugin makes it very easy to send larger images to devices with high pixel densities.
@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   \{% image_tag src="/image.png" width="100" %\}
 }
-  spec.homepage      = "https://github.com/netlify/jekyll-srcset"
+  spec.homepage      = "https://github.com/niveus/jekyll-srcset"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
