@@ -19,7 +19,7 @@ This will generate the right images and output something like:
 Add this line to your Gemfile:
 
 ```ruby
-gem 'jekyll-srcset'
+gem 'jekyll-srcset2'
 ```
 
 And then execute:
@@ -28,7 +28,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install jekyll-srcset
+    $ gem install jekyll-srcset2
 
 Then add the gem to your Jekyll `_config.yml`:
 

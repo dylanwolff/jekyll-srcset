@@ -4,10 +4,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'jekyll/srcset/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll-srcset"
+  spec.name          = "jekyll-srcset2"
   spec.version       = Jekyll::Srcset::VERSION
-  spec.authors       = ["Jason Gabriele"]
-  spec.email         = ["jason.gabriele@gmail.com"]
+  spec.authors       = ["Jason Gabriele", "Mathias Biilmann Christensen"]
+  spec.email         = ["jason.gabriele@gmail.com", "info@mathias-biilmann.net"]
   spec.summary       = %q{This Jekyll plugin ads an image_tag that will generate responsive img tags}
   spec.description   = %q{
   This Jekyll plugin makes it very easy to send larger images to devices with high pixel densities.
@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_runtime_dependency 'jekyll', '> 2'
+  spec.add_runtime_dependency 'jekyll', '~> 3.0'
 end
